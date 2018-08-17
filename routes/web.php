@@ -11,8 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',                   ['uses' => 'GameController@index', 'as' => 'index']);
 Route::get('/count',                   ['uses' => 'GameController@count', 'as' => 'count']);
+Route::get('/clear',                   ['uses' => 'GameController@clear', 'as' => 'clear']);
+Route::get('/first',                   ['uses' => 'GameController@first', 'as' => 'first']);
+Route::get('/start',                   ['uses' => 'GameController@start', 'as' => 'start']);
+
 

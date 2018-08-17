@@ -4,38 +4,81 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\Traits\SessionTrait;
+use App\Traits\GameTrait;
 
 class GameController extends Controller
 {
-    public function count(Request $request){
-        //$request->session()->flush();
-       // dd($request);
-        $current_step = null;
-        while($arr = current($request->check)){
-            $current_step = key($request->check);
-            break;
-        }
+    use SessionTrait, GameTrait;
 
-        if (!Session::has('current_player')) {
-            $current_player = 'x';
+    public function index() {
+        return view('welcome');
+    }
 
-        }
-        else{
-            $current_player = Session::get('current_player');
-        }
+    public function count(Request $request)
+    {
+        //dd($request);
+        $first = $this->getFirst();
+        $historyGames = $this->getPreviousGames($first);
+       // $this->makeStep($this->nextStep($historyGames));
+        $this->makeStep($this->madedStep($request));
 
-        if($current_player == 'x'){
-            $img = 'x.png';
-            Session::put('current_player', '0');
+        $this->changePlayer();
+        if(Session::get('currentPlayer') == 'computer'){
+            $this->computerStep();
         }
-        else{
-            $img = '0.png';
-            Session::put('current_player', 'x');
-        }
-        $current_step = (string) $current_step;
-
-        Session::put('count_'.$current_step, $img);
-        //dd(Session::get('current_player'));
         return redirect()->back();
     }
+
+    public function clear(Request $request)
+    {
+        $request->session()->flush();
+        return redirect()->back();
+    }
+
+    public function first(Request $request)
+    {
+        //dd($request);
+        if(isset($request->user)){
+            Session::put('first','user');
+            Session::put('currentPlayer','user');
+            $this->newPost('user');
+        }
+
+        if(isset($request->computer)){
+            Session::put('first','computer');
+            Session::put('currentPlayer','computer');
+            $this->newPost('computer');
+        }
+        $this->setLastId();
+        return redirect()->route('start');
+    }
+
+    public function start()
+    {
+        Session::put('step_num',1);
+        $this->computerStep();
+        return redirect()->route('index');
+    }
+
+    public function makeStep($current_step){
+        //dd($current_step);
+        $current_step = (string) $current_step;
+        $currentPlayer = $this->getCurrentPlayer();
+        $this->updateGame(Session::get('step_num'),$current_step);
+        Session::put('step_num',Session::get('step_num')+1);
+        Session::put('count_'.$current_step, $this->getImg($currentPlayer));
+        //dd(Session::get('count_8'));
+    }
+
+    public function computerStep(){
+        $first = $this->getFirst();
+        $historyGames = $this->getPreviousGames($first);
+        $nextStep = $this->nextStep($historyGames);
+        $this->makeStep($nextStep);
+
+        $this->changePlayer();
+    }
+
+
 }

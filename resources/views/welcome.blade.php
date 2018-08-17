@@ -4,6 +4,13 @@
 <head>
 </head>
 <body>
+<form method="GET" action="{{route('first')}}">
+    <label>User</label>
+    <input type="checkbox" name = "user">
+    <label>Computer</label>
+    <input type="checkbox" name = "computer">
+    <button type="submit">First player</button>
+</form>
 <form method="GET" action="{{route('count')}}">
     <input type="checkbox" name = "check[1]">
     <input type="checkbox" name = "check[2]">
@@ -22,7 +29,7 @@
 <br>
 <table style="width:10%">
 
-        <td>@if(Session::has('count_1'))
+        <td bgcolor="yellow">@if(Session::has('count_1'))
                 @if(Session::get('count_1') == 'x.png')
                     <img src="{{'../../img/x.png'}}" alt="альтернативный текст" width="10" height="10"/>
                 @else
@@ -31,7 +38,7 @@
                 @else
                     <img src="{{'../../img/null.jpg'}}" alt="альтернативный текст" width="10" height="10"/>
             @endif</td>
-        <td>@if(Session::has('count_2'))
+        <td bgcolor="#ffe4c4">@if(Session::has('count_2'))
                 @if(Session::get('count_2') == 'x.png')
                     <img src="{{'../../img/x.png'}}" alt="альтернативный текст" width="10" height="10"/>
                 @else
@@ -40,7 +47,7 @@
             @else
                 <img src="{{'../../img/null.jpg'}}" alt="альтернативный текст" width="10" height="10"/>
             @endif</td>
-        <td>@if(Session::has('count_3'))
+        <td bgcolor="yellow">@if(Session::has('count_3'))
                 @if(Session::get('count_3') == 'x.png')
                     <img src="{{'../../img/x.png'}}" alt="альтернативный текст" width="10" height="10"/>
                 @else
@@ -51,7 +58,7 @@
             @endif</td>
     </tr>
     <tr>
-        <td>@if(Session::has('count_4'))
+        <td bgcolor="#ffe4c4">@if(Session::has('count_4'))
                 @if(Session::get('count_4') == 'x.png')
                     <img src="{{'../../img/x.png'}}" alt="альтернативный текст" width="10" height="10"/>
                 @else
@@ -60,7 +67,7 @@
             @else
                 <img src="{{'../../img/null.jpg'}}" alt="альтернативный текст" width="10" height="10"/>
             @endif</td>
-        <td>@if(Session::has('count_5'))
+        <td bgcolor="yellow">@if(Session::has('count_5'))
                 @if(Session::get('count_5') == 'x.png')
                     <img src="{{'../../img/x.png'}}" alt="альтернативный текст" width="10" height="10"/>
                 @else
@@ -69,7 +76,7 @@
             @else
                 <img src="{{'../../img/null.jpg'}}" alt="альтернативный текст" width="10" height="10"/>
             @endif</td>
-        <td>@if(Session::has('count_6'))
+        <td bgcolor="#ffe4c4">@if(Session::has('count_6'))
                 @if(Session::get('count_6') == 'x.png')
                     <img src="{{'../../img/x.png'}}" alt="альтернативный текст" width="10" height="10"/>
                 @else
@@ -80,7 +87,7 @@
             @endif</td>
     </tr>
     <tr>
-        <td>@if(Session::has('count_7'))
+        <td bgcolor="yellow">@if(Session::has('count_7'))
                 @if(Session::get('count_7') == 'x.png')
                     <img src="{{'../../img/x.png'}}" alt="альтернативный текст" width="10" height="10"/>
                 @else
@@ -89,7 +96,7 @@
             @else
                 <img src="{{'../../img/null.jpg'}}" alt="альтернативный текст" width="10" height="10"/>
             @endif</td>
-        <td>@if(Session::has('count_8'))
+        <td bgcolor="#ffe4c4">@if(Session::has('count_8'))
                 @if(Session::get('count_8') == 'x.png')
                     <img src="{{'../../img/x.png'}}" alt="альтернативный текст" width="10" height="10"/>
                 @else
@@ -98,7 +105,7 @@
             @else
                 <img src="{{'../../img/null.jpg'}}" alt="альтернативный текст" width="10" height="10"/>
             @endif</td>
-        <td>@if(Session::has('count_9'))
+        <td bgcolor="yellow">@if(Session::has('count_9'))
                 @if(Session::get('count_9') == 'x.png')
                     <img src="{{'../../img/x.png'}}" alt="альтернативный текст" width="10" height="10"/>
                 @else
@@ -109,6 +116,9 @@
             @endif</td>
     </tr>
 </table>
+<form method="GET" action="{{route('clear')}}">
+    <button type="submit">Clear</button>
+</form>
 </body>
 </html>
 

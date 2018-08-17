@@ -13,18 +13,22 @@ class Steps extends Migration
      */
     public function up()
     {
-        Schema::create('games', function (Blueprint $table) {
-            $table->integer('id');
-            $table->integer('step_num');
-            $table->integer('res_1');
-            $table->integer('res_2');
-            $table->integer('res_3');
-            $table->integer('res_4');
-            $table->integer('res_5');
-            $table->integer('res_6');
-            $table->integer('res_7');
-            $table->integer('res_8');
-            $table->integer('res_9');
+        Schema::create('steps', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('step_num')->nullable();
+            $table->integer('res_1')->nullable();
+            $table->integer('res_2')->nullable();
+            $table->integer('res_3')->nullable();
+            $table->integer('res_4')->nullable();
+            $table->integer('res_5')->nullable();
+            $table->integer('res_6')->nullable();
+            $table->integer('res_7')->nullable();
+            $table->integer('res_8')->nullable();
+            $table->integer('res_9')->nullable();
+            $table->boolean('result')->nullable();
+            $table->string('first_start');
+            $table->rememberToken();
+            $table->timestamps();
         });
     }
 
