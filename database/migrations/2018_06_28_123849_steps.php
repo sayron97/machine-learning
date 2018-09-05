@@ -25,7 +25,7 @@ class Steps extends Migration
             $table->integer('res_7')->nullable();
             $table->integer('res_8')->nullable();
             $table->integer('res_9')->nullable();
-            $table->boolean('result')->nullable();
+            $table->string('result')->nullable();
             $table->string('first_start');
             $table->rememberToken();
             $table->timestamps();
